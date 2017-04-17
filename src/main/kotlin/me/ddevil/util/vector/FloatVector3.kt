@@ -1,6 +1,6 @@
 package me.ddevil.util.vector
 
-import me.ddevil.util.getOrException
+import me.ddevil.util.getFloat
 
 open class FloatVector3 : AbstractVector3<Float> {
     final override var x: Float
@@ -8,9 +8,9 @@ open class FloatVector3 : AbstractVector3<Float> {
     final override var z: Float
 
     constructor(map: Map<String, Any>) {
-        x = map.getOrException<Number>(X_IDENTIFIER).toFloat()
-        y = map.getOrException<Number>(Y_IDENTIFIER).toFloat()
-        z = map.getOrException<Number>(Z_IDENTIFIER).toFloat()
+        x = map.getFloat(X_IDENTIFIER)
+        y = map.getFloat(Y_IDENTIFIER)
+        z = map.getFloat(Z_IDENTIFIER)
     }
 
     @JvmOverloads

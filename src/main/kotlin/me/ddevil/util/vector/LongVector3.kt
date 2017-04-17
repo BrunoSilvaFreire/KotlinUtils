@@ -1,6 +1,6 @@
 package me.ddevil.util.vector
 
-import me.ddevil.util.getOrException
+import me.ddevil.util.getLong
 
 open class LongVector3 : AbstractVector3<Long> {
 
@@ -9,9 +9,9 @@ open class LongVector3 : AbstractVector3<Long> {
     final override var z: Long
 
     constructor(map: Map<String, Any>) {
-        x = map.getOrException<Number>(X_IDENTIFIER).toLong()
-        y = map.getOrException<Number>(Y_IDENTIFIER).toLong()
-        z = map.getOrException<Number>(Z_IDENTIFIER).toLong()
+        x = map.getLong(X_IDENTIFIER)
+        y = map.getLong(Y_IDENTIFIER)
+        z = map.getLong(Z_IDENTIFIER)
     }
 
     @JvmOverloads

@@ -1,6 +1,6 @@
 package me.ddevil.util.vector
 
-import me.ddevil.util.getOrException
+import me.ddevil.util.getInt
 
 open class IntVector2 : AbstractVector2<Int> {
 
@@ -8,8 +8,8 @@ open class IntVector2 : AbstractVector2<Int> {
     final override var y: Int
 
     constructor(map: Map<String, Any>) {
-        x = map.getOrException<Number>(X_IDENTIFIER).toInt()
-        y = map.getOrException<Number>(Y_IDENTIFIER).toInt()
+        x = map.getInt(X_IDENTIFIER)
+        y = map.getInt(Y_IDENTIFIER)
     }
 
     @JvmOverloads
