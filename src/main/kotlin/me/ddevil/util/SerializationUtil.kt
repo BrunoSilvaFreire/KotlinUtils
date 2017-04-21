@@ -1,11 +1,10 @@
 package me.ddevil.util
 
-import com.google.common.collect.HashMultimap
 import me.ddevil.util.exception.IllegalValueTypeException
 import me.ddevil.util.exception.ValueNotFoundException
 import me.ddevil.util.misc.Nameable
 import me.ddevil.util.serialization.DependentLoader
-import java.util.HashMap
+import java.util.*
 
 const val DEFAULT_NAME_IDENTIFIER = "name"
 const val DEFAULT_ALIAS_IDENTIFIER = "alias"
@@ -25,6 +24,8 @@ fun Map<String, *>.getInt(key: String) = getNumber(key).toInt()
 fun Map<String, *>.getLong(key: String) = getNumber(key).toLong()
 
 fun Map<String, *>.getMap(key: String): Map<String, *> = getOrException(key)
+
+fun Map<String, *>.getBoolean(key: String): Boolean = getOrException(key)
 
 fun <T> Map<String, *>.getList(key: String): List<T> = getOrException(key)
 
@@ -67,7 +68,12 @@ fun <O : Nameable> loadAndResolveDependentNameables(
     for ((objectName, serializedObject) in serializedObjects) {
         //Check if was not loaded as a dependency
         if (objectName !in loadedObjects) {
-            val obj = loadObject(objectName, serializedObject, dependencyMap, dependentLoader, serializedObjects, loadedObjects) {
+            val obj = loadObject(objectName,
+                    serializedObject,
+                    dependencyMap,
+                    dependentLoader,
+                    serializedObjects,
+                    loadedObjects) {
                 name, loadedObj: O ->
                 loadedObjects[name] = loadedObj
             }
@@ -92,7 +98,13 @@ private fun <O> loadObject(
     if (objectName in dependencyMap) {
         val dependencyName = dependencyMap[objectName]!!
         val serializedDependency = unloadedObjects[dependencyName] ?: throw IllegalStateException("Couldn't find serialized dependency $dependencyMap of dependant $objectName")
-        dependency = loadObject(dependencyName, serializedDependency, dependencyMap, dependentLoader, unloadedObjects, loadedObjects, onObjectLoaded)
+        dependency = loadObject(dependencyName,
+                serializedDependency,
+                dependencyMap,
+                dependentLoader,
+                unloadedObjects,
+                loadedObjects,
+                onObjectLoaded)
         onObjectLoaded(dependencyName, dependency!!)
     }
     return dependentLoader.load(serializedObject, loadedObjects, dependency)
