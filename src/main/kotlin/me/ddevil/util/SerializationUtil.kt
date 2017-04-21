@@ -23,7 +23,7 @@ fun Map<String, *>.getInt(key: String) = getNumber(key).toInt()
 
 fun Map<String, *>.getLong(key: String) = getNumber(key).toLong()
 
-fun Map<String, *>.getMap(key: String): Map<String, *> = getOrException(key)
+fun <V> Map<String, *>.getMap(key: String): Map<String, V> = getOrException(key)
 
 fun Map<String, *>.getBoolean(key: String): Boolean = getOrException(key)
 
