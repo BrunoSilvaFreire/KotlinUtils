@@ -25,6 +25,8 @@ fun Map<String, *>.getLong(key: String) = getNumber(key).toLong()
 
 fun <V> Map<String, *>.getMap(key: String): Map<String, V> = getOrException(key)
 
+fun Map<String, *>.getMapAny(key: String): Map<String, Any> = getMap(key)
+
 fun Map<String, *>.getBoolean(key: String): Boolean = getOrException(key)
 
 fun <T> Map<String, *>.getList(key: String): List<T> = getOrException(key)
