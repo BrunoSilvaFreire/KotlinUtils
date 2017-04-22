@@ -9,7 +9,7 @@ class GuavaTest {
     @Test
     fun builder() {
         val key = "test"
-        val value = null
+        val value = "Hellow"
         val s = immutableStringAnyMapBuilder().putIfNotNull(key, value).build()
         s.getString(key)
     }

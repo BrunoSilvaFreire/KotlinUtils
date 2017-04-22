@@ -11,6 +11,7 @@ const val DEFAULT_ALIAS_IDENTIFIER = "alias"
 const val DEFAULT_DESCRIPTION_IDENTIFIER = "description"
 const val DEFAULT_DEPENDENCIES_IDENTIFIER = "dependencies"
 
+
 fun Map<String, *>.getString(key: String): String = getOrException(key)
 
 fun Map<String, *>.getNumber(key: String): Number = getOrException(key)
@@ -22,7 +23,6 @@ fun Map<String, *>.getDouble(key: String) = getNumber(key).toDouble()
 fun Map<String, *>.getInt(key: String) = getNumber(key).toInt()
 
 fun Map<String, *>.getLong(key: String) = getNumber(key).toLong()
-
 fun <V> Map<String, *>.getMap(key: String): Map<String, V> = getOrException(key)
 
 fun Map<String, *>.getMapAny(key: String): Map<String, Any> = getMap(key)
@@ -30,6 +30,10 @@ fun Map<String, *>.getMapAny(key: String): Map<String, Any> = getMap(key)
 fun Map<String, *>.getBoolean(key: String): Boolean = getOrException(key)
 
 fun <T> Map<String, *>.getList(key: String): List<T> = getOrException(key)
+
+inline fun <reified V : Any, FV> Map<String, *>.getAndTransform(key: String, transform: (V) -> (FV)): FV {
+    return transform(getOrException<V>(key))
+}
 
 inline fun <reified T : Any> Map<String, *>.getOrException(key: String): T {
     val get = this[key] ?: throw ValueNotFoundException(key)

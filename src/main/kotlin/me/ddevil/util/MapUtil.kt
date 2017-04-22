@@ -1,9 +1,29 @@
 package me.ddevil.util
 
 import java.util.*
-
+import kotlin.collections.set
 
 private val random = Random()
+
+fun <T> MutableMap<String, T>.renameKey(key: String, newKey: String): Map<String, T> {
+    if (key in this) {
+        val obj = this[key]
+        if (obj != null) {
+            put(newKey, obj)
+        }
+    }
+    return this
+}
+
+fun <K, V> Map<K, V>.getUnsafe(key: K): V {
+    if (key in this) {
+        val obj = this[key]
+        if (obj != null) {
+            return obj
+        }
+    }
+    throw IllegalStateException("This map doesn't contain any value on the key $key!")
+}
 
 fun <K, V> Map<K, V>.invert(): Map<V, K> {
     val map = HashMap<V, K>()
@@ -32,7 +52,7 @@ fun <K, V : Comparable<V>> Map<K, V>.getTop(max: Int): List<K> {
         val vb = this[b] ?: return@sort 1
         return@sort -va.compareTo(vb)
     }
-    return set.slice(0..max - 1)
+    return set.slice(0 .. max - 1)
 }
 
 fun <K, V : Comparable<V>> Map<K, V>.getMin(max: Int): List<K> {
@@ -46,7 +66,7 @@ fun <K, V : Comparable<V>> Map<K, V>.getMin(max: Int): List<K> {
         val vb = this[b] ?: return@sort -1
         return@sort va.compareTo(vb)
     }
-    return set.slice(0..max - 1)
+    return set.slice(0 .. max - 1)
 }
 
 fun <K, V : Comparable<V>> Map<K, V>.max(): K {
