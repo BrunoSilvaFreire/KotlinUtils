@@ -75,4 +75,7 @@ open class IntVector3 : AbstractVector3<Int> {
     override fun toGeneric(value: Number) = value.toInt()
 
     override val clone: Vector3<Int> get() = IntVector3(x, y, z)
+
+    override fun toString() = "IntVector3(x=$x, y=$y, z=$z)"
+
 }
