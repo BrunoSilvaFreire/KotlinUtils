@@ -23,6 +23,7 @@ fun Map<String, *>.getDouble(key: String) = getNumber(key).toDouble()
 fun Map<String, *>.getInt(key: String) = getNumber(key).toInt()
 
 fun Map<String, *>.getLong(key: String) = getNumber(key).toLong()
+
 fun <V> Map<String, *>.getMap(key: String): Map<String, V> = getOrException(key)
 
 fun Map<String, *>.getMapAny(key: String): Map<String, Any> = getMap(key)
@@ -31,12 +32,37 @@ fun Map<String, *>.getBoolean(key: String): Boolean = getOrException(key)
 
 fun <T> Map<String, *>.getList(key: String): List<T> = getOrException(key)
 
+fun Map<String, *>.getStringOrNull(key: String): String? = getOrNull(key)
+
+fun Map<String, *>.getNumberOrNull(key: String): Number? = getOrNull(key)
+
+fun Map<String, *>.getFloatOrNull(key: String): Float? = getNumber(key).toFloat()
+
+fun Map<String, *>.getDoubleOrNull(key: String): Double? = getNumber(key).toDouble()
+
+fun Map<String, *>.getIntOrNull(key: String): Int? = getNumber(key).toInt()
+
+fun Map<String, *>.getLongOrNull(key: String): Long? = getNumber(key).toLong()
+
+fun <V> Map<String, *>.getMapOrNull(key: String): Map<String, V>? = getOrNull(key)
+
+fun Map<String, *>.getMapAnyOrNull(key: String): Map<String, Any>? = getMap(key)
+
+fun Map<String, *>.getBooleanOrNull(key: String): Boolean? = getOrNull(key)
+
+fun <T> Map<String, *>.getListOrNull(key: String): List<T>? = getOrNull(key)
+
 inline fun <reified V : Any, FV> Map<String, *>.getAndTransform(key: String, transform: (V) -> (FV)): FV {
     return transform(getOrException<V>(key))
 }
 
 inline fun <reified T : Any> Map<String, *>.getOrException(key: String): T {
     val get = this[key] ?: throw ValueNotFoundException(key)
+    return (get as? T) ?: throw IllegalValueTypeException(T::class.java, get.javaClass)
+}
+
+inline fun <reified T : Any> Map<String, *>.getOrNull(key: String): T? {
+    val get = this[key] ?: return null
     return (get as? T) ?: throw IllegalValueTypeException(T::class.java, get.javaClass)
 }
 
