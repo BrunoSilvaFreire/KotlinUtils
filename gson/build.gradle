@@ -3,12 +3,15 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 
 group 'me.ddevil'
-version '$proj_version'
+
+version '1.0.0-SNAPSHOT'
+
 sourceCompatibility = 1.8
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            artifactId "$rootProject.name-$project.name"
             from project.components.java
         }
     }
