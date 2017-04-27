@@ -20,6 +20,35 @@ fun <K, V> ImmutableMap.Builder<K, V>.putIf(
     return this
 }
 
+fun <K> ImmutableMap.Builder<K, Any>.putSerializable(
+        key: K,
+        obj: Serializable
+): ImmutableMap.Builder<K, Any> {
+    put(key, obj.serialize())
+    return this
+}
+
+fun <K> ImmutableMap.Builder<K, Any>.putSerializableIf(
+        key: K,
+        obj: Serializable,
+        predicate: () -> Boolean
+): ImmutableMap.Builder<K, Any> {
+    if (predicate()) {
+        putSerializable(key, obj)
+    }
+    return this
+}
+
+fun <K> ImmutableMap.Builder<K, Any>.putSerializableIfNotNull(
+        key: K,
+        obj: Serializable?
+): ImmutableMap.Builder<K, Any> {
+    if (obj != null) {
+        putSerializable(key, obj)
+    }
+    return this
+}
+
 fun <K, V> ImmutableMap.Builder<K, V>.putIfNotNull(key: K, obj: V?) = putIf(key, obj) { obj != null }
 
 fun <K, V> ImmutableMap.Builder<K, V>.putAllNotNull(map: Map<K, V?>) = putAllIf(map) { key, value ->

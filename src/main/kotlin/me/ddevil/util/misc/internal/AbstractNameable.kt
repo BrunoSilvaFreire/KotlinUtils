@@ -2,7 +2,6 @@ package me.ddevil.util.misc.internal
 
 import me.ddevil.util.getOrException
 import me.ddevil.util.misc.Nameable
-import me.ddevil.util.serialization.Serializable
 abstract class AbstractNameable : Nameable {
 
 
