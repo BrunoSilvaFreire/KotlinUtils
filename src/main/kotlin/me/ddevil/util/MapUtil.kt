@@ -52,7 +52,7 @@ fun <K, V : Comparable<V>> Map<K, V>.getTop(max: Int): List<K> {
         val vb = this[b] ?: return@sort 1
         return@sort -va.compareTo(vb)
     }
-    return set.slice(0 .. max - 1)
+    return set.slice(0..max - 1)
 }
 
 fun <K, V : Comparable<V>> Map<K, V>.getMin(max: Int): List<K> {
@@ -66,7 +66,35 @@ fun <K, V : Comparable<V>> Map<K, V>.getMin(max: Int): List<K> {
         val vb = this[b] ?: return@sort -1
         return@sort va.compareTo(vb)
     }
-    return set.slice(0 .. max - 1)
+    return set.slice(0..max - 1)
+}
+
+fun <K, V, T : Comparable<T>> Map<K, V>.getTopBy(max: Int, selector: (V) -> T): List<K> {
+    if (isEmpty()) {
+        return Collections.emptyList()
+    }
+    val set = ArrayList<K>(keys)
+    Collections.sort(set) {
+        a, b ->
+        val va = selector(this[a] ?: return@sort -1)
+        val vb = selector(this[b] ?: return@sort 1)
+        return@sort -va.compareTo(vb)
+    }
+    return set.slice(0..max - 1)
+}
+
+fun <K, V, T : Comparable<T>> Map<K, V>.getMinBy(max: Int, selector: (V) -> T): List<K> {
+    if (isEmpty()) {
+        return Collections.emptyList()
+    }
+    val set = ArrayList<K>(keys)
+    Collections.sort(set) {
+        a, b ->
+        val va = selector(this[a] ?: return@sort 1)
+        val vb = selector(this[b] ?: return@sort -1)
+        return@sort va.compareTo(vb)
+    }
+    return set.slice(0..max - 1)
 }
 
 fun <K, V : Comparable<V>> Map<K, V>.max(): K {
@@ -94,6 +122,40 @@ fun <K, V : Comparable<V>> Map<K, V>.min(): K {
     for ((key, value) in this.entries) {
         if (highestValue == null || value < highestValue) {
             highestValue = value
+            highestKey = key
+
+        }
+    }
+    return highestKey ?: throw IllegalStateException("Couldn't find max value. This shouldn't happen!")
+}
+
+fun <K, V, T : Comparable<T>> Map<K, V>.maxBy(selector: (V) -> T): K {
+    if (isEmpty()) {
+        throw IllegalStateException("Map is empty!")
+    }
+    var highestKey: K? = null
+    var highestValue: T? = null
+    for ((key, value) in this.entries) {
+        val obj = selector(value)
+        if (highestValue == null || obj > highestValue) {
+            highestValue = obj
+            highestKey = key
+
+        }
+    }
+    return highestKey ?: throw IllegalStateException("Couldn't find max value. This shouldn't happen!")
+}
+
+fun <K, V, T : Comparable<T>> Map<K, V>.minBy(selector: (V) -> T): K {
+    if (isEmpty()) {
+        throw IllegalStateException("Map is empty!")
+    }
+    var highestKey: K? = null
+    var highestValue: T? = null
+    for ((key, value) in this.entries) {
+        val obj = selector(value)
+        if (highestValue == null || obj < highestValue) {
+            highestValue = obj
             highestKey = key
 
         }
