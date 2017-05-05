@@ -1,4 +1,4 @@
-package me.ddevil.util.misc.internal
+package me.ddevil.util.misc
 
 import me.ddevil.util.getOrException
 import me.ddevil.util.misc.Describable

@@ -1,8 +1,44 @@
 package me.ddevil.util
 
+import com.google.common.base.Preconditions
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
 
+
+fun checkArgument(expression: Boolean) = Preconditions.checkArgument(expression)
+
+fun checkArgument(expression: Boolean, errorMessage: Any) = Preconditions.checkArgument(expression, errorMessage)
+
+fun checkArgument(expression: Boolean,
+                  vararg errorMessageArgs: Array<out Any>,
+                  errorMessageTemplate: String) = Preconditions.checkArgument(expression,
+        errorMessageTemplate,
+        errorMessageArgs)
+
+fun checkState(expression: Boolean) = Preconditions.checkState(expression)
+
+fun checkState(expression: Boolean, errorMessage: Any) = Preconditions.checkState(expression, errorMessage)
+
+fun checkState(
+        expression: Boolean,
+        vararg errorMessageArgs: Array<out Any>,
+        errorMessageTemplate: String
+) = Preconditions.checkState(
+        expression,
+        errorMessageTemplate,
+        errorMessageArgs)
+
+fun checkPositionIndex(index: Int, size: Int) = Preconditions.checkPositionIndex(index, size)
+
+fun checkPositionIndex(index: Int, size: Int, desc: String?) = Preconditions.checkPositionIndex(index, size, desc)
+
+fun checkPositionIndexes(start: Int, end: Int, size: Int) = Preconditions.checkPositionIndexes(start, end, size)
+
+fun checkElementIndex(index: Int, size: Int) = Preconditions.checkElementIndex(index, size)
+
+fun checkElementIndex(index: Int, size: Int, desc: String?) = Preconditions.checkElementIndex(index, size, desc)
+
+//Immutable shit
 fun <T> immutableListBuilder() = ImmutableList.builder<T>()!!
 
 fun <K, V> immutableMapBuilder() = ImmutableMap.builder<K, V>()!!
