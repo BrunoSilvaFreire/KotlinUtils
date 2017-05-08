@@ -2,16 +2,23 @@ package me.ddevil.util.command
 
 import me.ddevil.util.checkArgument
 
-class CommandArgs(
-        label: String,
-        args: Array<String>,
-        subCommand: Int) {
+fun commandArgsFrom(string: String): CommandArgs {
+    val content = string.split(" ")
+    val label = content.first()
+    val args = content.slice(1..content.lastIndex).toTypedArray()
+    return CommandArgs(label, args)
+}
+
+class CommandArgs {
+
+
     /**
      * Gets the label including sub command labels of this command
 
      * @return Something like 'test.subcommand'
      */
     val label: String
+
     /**
      * Gets all the arguments after the command's label. ie. if the command
      * label was test.subcommand and the arguments were subcommand foo foo, it
@@ -21,6 +28,12 @@ class CommandArgs(
      */
     val args: Array<String>
 
+
+    constructor(label: String, args: Array<String>) {
+        this.label = label
+        this.args = args
+    }
+
     /**
      * Returns the length of the command arguments
 
@@ -28,18 +41,6 @@ class CommandArgs(
      */
     val length get() = args.size
 
-    init {
-        val modArgs = arrayOfNulls<String>(args.size - subCommand)
-        System.arraycopy(args, subCommand, modArgs, 0, args.size - subCommand)
-        val buffer = StringBuilder()
-        buffer.append(label)
-        for (x in 0..subCommand - 1) {
-            buffer.append(".").append(args[x])
-        }
-        val cmdLabel = buffer.toString()
-        this.label = cmdLabel
-        this.args = modArgs.requireNoNulls()
-    }
 
     /**
      * Gets the argument at the specified index
@@ -62,7 +63,7 @@ class CommandArgs(
             iStart++
         }
         if (length > iStart) {
-            for (i in start..args.size - 1) {
+            for (i in start..args.lastIndex) {
                 if (i > end) {
                     break
                 }
@@ -73,7 +74,9 @@ class CommandArgs(
                     }
                     message += char
                 }
-                message += ' '
+                if (i != args.lastIndex) {
+                    message += ' '
+                }
             }
         }
         action(message)

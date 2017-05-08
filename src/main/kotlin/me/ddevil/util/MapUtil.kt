@@ -5,6 +5,11 @@ import kotlin.collections.set
 
 private val random = Random()
 
+fun <K, V, T : MutableMap<K, V>> T.append(key: K, value: V): T {
+    this[key] = value
+    return this
+}
+
 fun <T> MutableMap<String, T>.renameKey(key: String, newKey: String): Map<String, T> {
     if (key in this) {
         val obj = this[key]
