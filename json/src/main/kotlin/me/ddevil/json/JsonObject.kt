@@ -1,6 +1,8 @@
 package me.ddevil.json
 
-class JsonObject : HashMap<String, Any> {
+import java.io.ByteArrayInputStream
+
+class JsonObject : HashMap<String, Any?>, JsonElement {
 
     constructor() : super()
 
@@ -8,14 +10,16 @@ class JsonObject : HashMap<String, Any> {
 
     constructor(initialCapacity: Int, loadFactor: Float) : super(initialCapacity, loadFactor)
 
-    constructor(m: Map<String, *>) : super(m)
+    constructor(m: Map<String, Any?>) : super(m)
 
-    override fun toString(): String {
+    fun toInputStream() = ByteArrayInputStream(toString().toByteArray())
+
+    override fun toJson(): String {
         var string = "{"
         for ((index, entry) in entries.withIndex()) {
             val key = entry.key
             val value = entry.value
-            string += "\"$key\": ${serializeValue(value)}"
+            string += "\"$key\": ${serializeValueToJson(value)}"
             if (index != size - 1) {
                 string += ","
             }
