@@ -36,13 +36,13 @@ fun Map<String, *>.getStringOrNull(key: String): String? = getOrNull(key)
 
 fun Map<String, *>.getNumberOrNull(key: String): Number? = getOrNull(key)
 
-fun Map<String, *>.getFloatOrNull(key: String): Float? = getNumber(key).toFloat()
+fun Map<String, *>.getFloatOrNull(key: String): Float? = getNumberOrNull(key)?.toFloat()
 
-fun Map<String, *>.getDoubleOrNull(key: String): Double? = getNumber(key).toDouble()
+fun Map<String, *>.getDoubleOrNull(key: String): Double? = getNumberOrNull(key)?.toDouble()
 
-fun Map<String, *>.getIntOrNull(key: String): Int? = getNumber(key).toInt()
+fun Map<String, *>.getIntOrNull(key: String): Int? = getNumberOrNull(key)?.toInt()
 
-fun Map<String, *>.getLongOrNull(key: String): Long? = getNumber(key).toLong()
+fun Map<String, *>.getLongOrNull(key: String): Long? = getNumberOrNull(key)?.toLong()
 
 fun <V> Map<String, *>.getMapOrNull(key: String): Map<String, V>? = getOrNull(key)
 
