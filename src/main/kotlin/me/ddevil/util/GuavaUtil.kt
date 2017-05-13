@@ -4,6 +4,11 @@ import com.google.common.base.Preconditions
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
 
+fun <K, V> immutableMap(init: ImmutableMap.Builder<K, V>.() -> (Unit)): ImmutableMap<K, V> {
+    val b = ImmutableMap.builder<K, V>()
+    b.init()
+    return b.build()
+}
 
 fun checkArgument(expression: Boolean) = Preconditions.checkArgument(expression)
 

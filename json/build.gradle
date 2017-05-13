@@ -11,7 +11,7 @@ sourceCompatibility = 1.8
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId "$rootProject.name-$project.name"
+            artifactId "json"
             from project.components.java
         }
     }
