@@ -1,7 +1,10 @@
-
 import me.ddevil.json.json
 import me.ddevil.json.jsonArray
+import me.ddevil.json.parse.JsonParser
+import me.ddevil.util.getResource
 import org.junit.Test
+import java.io.File
+import java.io.FileReader
 
 class JsonTest {
     @Test
@@ -22,5 +25,13 @@ class JsonTest {
             }
         }
         println(json.toJson())
+    }
+
+    @Test
+    fun parse() {
+        val jsonTest = getResource("testJson.json")
+        val json = FileReader(File(jsonTest.toURI())).readText()
+        println(json)
+        println(JsonParser().parseObject(json).toJson())
     }
 }
