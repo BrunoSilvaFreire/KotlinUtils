@@ -20,7 +20,7 @@ fun Map<*, *>.toJsonObject(): JsonObject {
     }
     val json = JsonObject()
     for ((key, value) in this) {
-        json[key.toString()] = serializeValueToJson(value)
+        json[key.toString()] = value
 
     }
     return json
@@ -53,5 +53,5 @@ internal fun serializeValueToJson(value: Any?): String? {
     if (value is Iterable<*>) {
         return (value as Iterable<Any>).toJsonArray().toJson()
     }
-    return value.toString()
+    return "\"$value\""
 }

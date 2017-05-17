@@ -11,12 +11,6 @@ import java.nio.charset.Charset
 class JsonParser {
     val verbose = true
 
-    fun log(s: String) {
-        if (verbose) {
-            println(s)
-        }
-    }
-
     fun parseObject(rawValue: StringBuilder) = parse(rawValue) as JsonObject
 
     fun parseObject(json: String) = parse(json) as JsonObject
@@ -165,7 +159,6 @@ class JsonParser {
         var world = JsonWorld(JsonParsingStatus.INIT)
         do {
             val token = lexer.nextToken()
-            log("JsonToken: $token")
             world = sm.next(world, token)
         } while (token.type != JsonTokenType.EOF)
 
