@@ -56,4 +56,21 @@ open class IntVector2 : AbstractVector2<Int> {
     override fun divAssignX(value: Number) {
         x /= value.toInt()
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+        if (other !is IntVector2) {
+            return false
+        }
+        return x == other.x && y == other.y
+    }
+
+    override fun hashCode(): Int {
+        var result = x
+        result = 31 * result + y
+        return result
+    }
+
 }

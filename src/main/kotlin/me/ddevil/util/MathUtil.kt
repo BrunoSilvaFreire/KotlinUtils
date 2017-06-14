@@ -1,7 +1,5 @@
 package me.ddevil.util
 
-import java.util.*
-
 fun Int.square() = this * this
 
 fun Long.square() = this * this
