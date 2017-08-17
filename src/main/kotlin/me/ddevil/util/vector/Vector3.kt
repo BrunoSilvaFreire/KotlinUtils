@@ -5,7 +5,7 @@ import java.util.*
 /**
  * Represents a 3 dimensional vector, with the x and y axis.
  *
- * For a bi-dimensional vector, check [Vector3]
+ * For a bi-dimensional vector, check [Vector2]
  */
 interface Vector3<N : Number> : Vector2<N> {
     /**
