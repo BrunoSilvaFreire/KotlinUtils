@@ -4,6 +4,17 @@ import me.ddevil.util.getInt
 
 open class IntVector3 : AbstractVector3<Int> {
 
+    companion object {
+        val zero = IntVector3(0, 0, 0)
+        val one = IntVector3(1, 1, 1)
+        val up = IntVector3(0, 1, 0)
+        val down = IntVector3(0, -1, 0)
+        val left = IntVector3(-1, 0, 0)
+        val right = IntVector3(1, 0, 0)
+        val forward = IntVector3(0, 0, 1)
+        val back = IntVector3(0, 0, -1)
+    }
+
     final override var x: Int
     final override var y: Int
     final override var z: Int

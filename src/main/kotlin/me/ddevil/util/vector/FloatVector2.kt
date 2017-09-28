@@ -3,6 +3,14 @@ package me.ddevil.util.vector
 import me.ddevil.util.getFloat
 
 open class FloatVector2 : AbstractVector2<Float> {
+    companion object {
+        val zero = FloatVector2(0.0F, 0.0F)
+        val one = FloatVector2(1F, 1F)
+        val up = FloatVector2(0.0F, 1F)
+        val down = FloatVector2(0.0F, -1F)
+        val left = FloatVector2(-1F, 0.0F)
+        val right = FloatVector2(1F, 0.0F)
+    }
 
     final override var x: Float
     final override var y: Float

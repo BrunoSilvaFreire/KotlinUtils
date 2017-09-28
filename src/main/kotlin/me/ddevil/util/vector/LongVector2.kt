@@ -3,6 +3,14 @@ package me.ddevil.util.vector
 import me.ddevil.util.getLong
 
 open class LongVector2 : AbstractVector2<Long> {
+    companion object {
+        val zero = LongVector2(0L, 0L)
+        val one = LongVector2(1L, 1L)
+        val up = LongVector2(0L, 1L)
+        val down = LongVector2(0L, -1L)
+        val left = LongVector2(-1L, 0L)
+        val right = LongVector2(1L, 0L)
+    }
 
     final override var x: Long
     final override var y: Long
@@ -11,6 +19,7 @@ open class LongVector2 : AbstractVector2<Long> {
         x = map.getLong(X_IDENTIFIER)
         y = map.getLong(Y_IDENTIFIER)
     }
+
     @JvmOverloads
     constructor(x: Long = 0, y: Long = 0) : super() {
         this.x = x

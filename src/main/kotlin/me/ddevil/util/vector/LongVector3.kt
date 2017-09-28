@@ -3,6 +3,16 @@ package me.ddevil.util.vector
 import me.ddevil.util.getLong
 
 open class LongVector3 : AbstractVector3<Long> {
+    companion object {
+        val zero = LongVector3(0L, 0L, 0L)
+        val one = LongVector3(1L, 1L, 1L)
+        val up = LongVector3(0L, 1L, 0L)
+        val down = LongVector3(0L, -1L, 0L)
+        val left = LongVector3(-1L, 0L, 0L)
+        val right = LongVector3(1L, 0L, 0L)
+        val forward = LongVector3(0L, 0L, 1L)
+        val back = LongVector3(0L, 0L, -1L)
+    }
 
     final override var x: Long
     final override var y: Long

@@ -4,6 +4,17 @@ import me.ddevil.util.getDouble
 
 open class DoubleVector3 : AbstractVector3<Double> {
 
+    companion object {
+        val zero = DoubleVector3(0.0, 0.0, 0.0)
+        val one = DoubleVector3(1.0, 1.0, 1.0)
+        val up = DoubleVector3(0.0, 1.0, 0.0)
+        val down = DoubleVector3(0.0, -1.0, 0.0)
+        val left = DoubleVector3(-1.0, 0.0, 0.0)
+        val right = DoubleVector3(1.0, 0.0, 0.0)
+        val forward = DoubleVector3(0.0, 0.0, 1.0)
+        val back = DoubleVector3(0.0, 0.0, -1.0)
+    }
+
     final override var x: Double
     final override var y: Double
     final override var z: Double
@@ -20,6 +31,7 @@ open class DoubleVector3 : AbstractVector3<Double> {
         this.y = y
         this.z = z
     }
+
     override val clone: Vector3<Double> get() = DoubleVector3(x, y, z)
 
     override fun toDouble(): Vector3<Double> = this
