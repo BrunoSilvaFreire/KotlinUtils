@@ -1,12 +1,12 @@
 package me.ddevil.util
 
-import java.util.concurrent.ThreadLocalRandom
+import java.util.concurrent.ThreadLocalRandom.current
 import me.ddevil.util.vector.*
 import java.awt.Color
 import java.util.*
 
 @JvmOverloads
-fun randomColor(random: Random = Random()): Color {
+fun randomColor(random: Random = current()): Color {
     val r = random.nextInt(256)
     val g = random.nextInt(256)
     val b = random.nextInt(256)
@@ -14,58 +14,58 @@ fun randomColor(random: Random = Random()): Color {
 }
 
 @JvmOverloads
-fun randomVector2Float(scale: Float = 1.0F, random: Random = ThreadLocalRandom.current()) = FloatVector2(
+fun randomVector2Float(scale: Float = 1.0F, random: Random = current()) = FloatVector2(
         random.nextFloat() * scale,
         random.nextFloat() * scale
 )
 
 @JvmOverloads
-fun randomVector3Float(scale: Float = 1.0F, random: Random = ThreadLocalRandom.current()) = FloatVector3(
+fun randomVector3Float(scale: Float = 1.0F, random: Random = current()) = FloatVector3(
         random.nextFloat() * scale,
         random.nextFloat() * scale,
         random.nextFloat() * scale
 )
 
 @JvmOverloads
-fun randomVector2Double(scale: Double = 1.0, random: Random = ThreadLocalRandom.current()) = DoubleVector2(
+fun randomVector2Double(scale: Double = 1.0, random: Random = current()) = DoubleVector2(
         random.nextDouble() * scale,
         random.nextDouble() * scale
 )
 
 @JvmOverloads
-fun randomVector3Double(scale: Double = 1.0, random: Random = ThreadLocalRandom.current()) = DoubleVector3(
+fun randomVector3Double(scale: Double = 1.0, random: Random = current()) = DoubleVector3(
         random.nextDouble() * scale,
         random.nextDouble() * scale,
         random.nextDouble() * scale
 )
 
 @JvmOverloads
-fun randomVector2Int(bound: Int = Int.MAX_VALUE, scale: Int = 1, random: Random = ThreadLocalRandom.current()) = IntVector2(
+fun randomVector2Int(bound: Int = Int.MAX_VALUE, scale: Int = 1, random: Random = current()) = IntVector2(
         random.nextInt(bound) * scale,
         random.nextInt(bound) * scale
 )
 
 @JvmOverloads
-fun randomVector3Int(bound: Int = Int.MAX_VALUE, scale: Int = 1, random: Random = ThreadLocalRandom.current()) = IntVector3(
+fun randomVector3Int(bound: Int = Int.MAX_VALUE, scale: Int = 1, random: Random = current()) = IntVector3(
         random.nextInt(bound) * scale,
         random.nextInt(bound) * scale,
         random.nextInt(bound) * scale
 )
 
 @JvmOverloads
-fun randomVector2Long(scale: Long = 1, random: Random = ThreadLocalRandom.current()) = LongVector2(
+fun randomVector2Long(scale: Long = 1, random: Random = current()) = LongVector2(
         random.nextLong() * scale,
         random.nextLong() * scale
 )
 
 @JvmOverloads
-fun randomVector3Long(scale: Long = 1, random: Random = ThreadLocalRandom.current()) = LongVector3(
+fun randomVector3Long(scale: Long = 1, random: Random = current()) = LongVector3(
         random.nextLong() * scale,
         random.nextLong() * scale,
         random.nextLong() * scale
 )
 
-fun <T> Iterable<T>.random(random: Random = ThreadLocalRandom.current()): T {
+fun <T> Iterable<T>.random(random: Random = current()): T {
     val pos = random.nextInt(this.count() + 1)
     return this.elementAt(pos)
 }
