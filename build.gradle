@@ -6,7 +6,7 @@ group 'me.ddevil'
 version '1.0.1-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.4'
+    ext.kotlin_version = '1.2.0'
     ext.proj_version = "1.0.0-SNASPHOT"
     repositories {
         mavenCentral()
@@ -22,13 +22,19 @@ sourceCompatibility = 1.8
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from project.components.java
+            from(project.components.java)
         }
     }
     repositories {
-
         maven {
-            url 'file://' + rootDir + "/publication"
+            credentials {
+                username = user
+                password = pass
+            }
+            url = 'http://repo.imddevil.com/repository/maven-snapshots/'
+        }
+        maven {
+            url = "file://$rootDir/publication"
         }
 
     }
