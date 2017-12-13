@@ -6,7 +6,9 @@ const val Y_IDENTIFIER = "y"
 
 const val Z_IDENTIFIER = "z"
 
-fun <N : Number> Vector2<N>.clampMagnitude(max: Double, min: Double): Vector2<N> {
+const val W_IDENTIFIER = "w"
+
+fun <V : Vector2<N>, N : Number> V.clampMagnitude(max: Double, min: Double): V {
     if (magnitude > max) {
         magnitude = max
     }
@@ -16,4 +18,4 @@ fun <N : Number> Vector2<N>.clampMagnitude(max: Double, min: Double): Vector2<N>
     return this
 }
 
-fun <N : Number> Vector2<N>.clampMagnitude01() = clampMagnitude(0.0, 1.0)
+fun <V : Vector2<N>, N : Number> V.clampMagnitude01() = clampMagnitude(0.0, 1.0)
