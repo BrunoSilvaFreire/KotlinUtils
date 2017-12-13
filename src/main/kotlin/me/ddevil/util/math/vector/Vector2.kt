@@ -9,43 +9,6 @@ import me.ddevil.util.square
 abstract class Vector2<N : Number> : Serializable {
     abstract val x: N
     abstract val y: N
-    //Delegates
-    protected abstract fun plusAssignX(value: Number)
-
-    protected abstract fun plusAssignY(value: Number)
-
-
-    protected abstract fun minusAssignX(value: Number)
-
-    protected abstract fun minusAssignY(value: Number)
-
-
-    protected abstract fun timesAssignX(value: Number)
-
-    protected abstract fun timesAssignY(value: Number)
-
-
-    protected abstract fun divAssignX(value: Number)
-
-    protected abstract fun divAssignY(value: Number)
-
-    protected abstract fun toGeneric(value: Number): N
-
-
-    override fun serialize(): Map<String, Any> = immutableMap {
-        this[X_IDENTIFIER] = x
-        this[Y_IDENTIFIER] = y
-    }
-
-    open fun toInt(): Vector2<Int> = IntVector2(x.toInt(), y.toInt())
-
-    open fun toFloat(): Vector2<Float> = FloatVector2(x.toFloat(), y.toFloat())
-
-    open fun toLong(): Vector2<Long> = LongVector2(x.toLong(), y.toLong())
-
-    open fun toDouble(): Vector2<Double> = DoubleVector2(x.toDouble(), y.toDouble())
-
-    abstract val clone: Vector2<N>
 
     open val normalized: Vector2<N>
         get() = clone.normalize()
@@ -56,7 +19,15 @@ abstract class Vector2<N : Number> : Serializable {
             this /= magnitude / value
         }
 
-    open fun distance(other: Vector2<*>) = (other - this).magnitude
+    fun distance(other: Vector2<*>) = (other - this).magnitude
+
+
+    abstract val clone: Vector2<N>
+
+    override fun serialize(): Map<String, Any> = immutableMap {
+        this[X_IDENTIFIER] = x
+        this[Y_IDENTIFIER] = y
+    }
 
     fun compareTo(other: Vector2<*>): Int {
         if (this === other || this == other) {
@@ -163,5 +134,34 @@ abstract class Vector2<N : Number> : Serializable {
         clone /= value
         return clone
     }
+
+    open fun toInt(): Vector2<Int> = IntVector2(x.toInt(), y.toInt())
+
+    open fun toFloat(): Vector2<Float> = FloatVector2(x.toFloat(), y.toFloat())
+
+    open fun toLong(): Vector2<Long> = LongVector2(x.toLong(), y.toLong())
+
+    open fun toDouble(): Vector2<Double> = DoubleVector2(x.toDouble(), y.toDouble())
+
+    protected abstract fun plusAssignX(value: Number)
+
+    protected abstract fun plusAssignY(value: Number)
+
+
+    protected abstract fun minusAssignX(value: Number)
+
+    protected abstract fun minusAssignY(value: Number)
+
+
+    protected abstract fun timesAssignX(value: Number)
+
+    protected abstract fun timesAssignY(value: Number)
+
+
+    protected abstract fun divAssignX(value: Number)
+
+    protected abstract fun divAssignY(value: Number)
+
+    protected abstract fun toGeneric(value: Number): N
 }
 

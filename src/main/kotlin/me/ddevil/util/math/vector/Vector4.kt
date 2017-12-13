@@ -5,6 +5,7 @@ import me.ddevil.util.set
 
 abstract class Vector4<N : Number> : Vector3<N>() {
     abstract val w: N
+
     override val normalized: Vector4<N>
         get() = clone.normalize()
 
@@ -13,12 +14,15 @@ abstract class Vector4<N : Number> : Vector3<N>() {
         return this
     }
 
+    override abstract val clone: Vector4<N>
+
     override fun serialize(): Map<String, Any> = immutableMap {
         putAll(super.serialize())
         this[W_IDENTIFIER] = w
     }
 
-    override abstract val clone: Vector4<N>
+    fun distance(other: Vector4<*>) = (other - this).magnitude
+
     protected abstract fun plusAssignW(value: Number)
 
 
@@ -29,7 +33,6 @@ abstract class Vector4<N : Number> : Vector3<N>() {
 
     protected abstract fun divAssignW(value: Number)
 
-    fun distance(other: Vector4<*>) = (other - this).magnitude
 
     override fun toInt(): Vector4<Int> = IntVector4(x.toInt(), z.toInt(), y.toInt(), w.toInt())
 

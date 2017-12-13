@@ -7,6 +7,7 @@ const val Y_IDENTIFIER = "y"
 const val Z_IDENTIFIER = "z"
 
 const val W_IDENTIFIER = "w"
+
 typealias Vector2f = FloatVector2
 typealias Vector2d = DoubleVector2
 typealias Vector2i = IntVector2
