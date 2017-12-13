@@ -1,79 +1,136 @@
 package me.ddevil.util.math.vector
 
-import java.util.*
+import com.google.common.collect.ImmutableMap
 
-/**
- * Represents a 3 dimensional vector, with the x and y axis.
- *
- * For a bi-dimensional vector, check [Vector2]
- */
-interface Vector3<N : Number> : Vector2<N> {
-    /**
-     * The value of the z axis
-     */
-    var z: N
+abstract class Vector3<N : Number> : Vector2<N>() {
+    abstract val z: N
+    override fun serialize(): Map<String, Any> = ImmutableMap.builder<String, Any>()
+            .putAll(super.serialize())
+            .put(Z_IDENTIFIER, z)
+            .build()
 
-    /**
-     * Returns a normalized / "with a [magnitude] of 1" [clone] of this vector.
-     *
-     * Important note: This does not changes any value in this vector, all of the changes are made in a [clone].
-     * If you wish to make changes in this instance of the vector, check [normalize].
-     *
-     * @see normalize
-     */
+    protected abstract fun plusAssignZ(value: Number)
+
+
+    protected abstract fun minusAssignZ(value: Number)
+
+
+    protected abstract fun timesAssignZ(value: Number)
+
+    protected abstract fun divAssignZ(value: Number)
+    fun distance(other: Vector3<*>) = (other - this).magnitude
     override val normalized: Vector3<N>
+        get() = clone.normalize()
 
-    /**
-     * Makes a copy of this vector with the same [x] and [y] values
-     */
-    override val clone: Vector3<N>
+    override fun normalize(): Vector3<N> {
+        super.normalize()
+        return this
+    }
 
-    /**
-     * The distance from this vector to the [other]
-     */
-    fun distance(other: Vector3<*>): Double
+    override abstract val clone: Vector3<N>
 
+    override fun toInt(): Vector3<Int> = IntVector3(x.toInt(), z.toInt(), y.toInt())
 
-    /**
-     * Changes the [magnitude] of this vector to 1 and returns this instance.
-     *
-     * Important note: This does changes the [x] and [y] value in this vector.
-     * If you don't wish to make changes in this instance of the vector, check [normalized].
-     *
-     * @see normalize
-     */
-    override fun normalize(): Vector3<N>
+    override fun toFloat(): Vector3<Float> = FloatVector3(x.toFloat(), y.toFloat(), z.toFloat())
 
-    override fun toInt(): Vector3<Int>
+    override fun toLong(): Vector3<Long> = LongVector3(x.toLong(), y.toLong(), z.toLong())
 
-    override fun toFloat(): Vector3<Float>
-
-    override fun toLong(): Vector3<Long>
-
-    override fun toDouble(): Vector3<Double>
-
-    operator fun plusAssign(other: Vector3<*>)
-
-    operator fun plus(other: Vector3<*>): Vector3<N>
-
-    operator fun minusAssign(other: Vector3<*>)
-
-    operator fun minus(other: Vector3<*>): Vector3<N>
-
-    operator fun timesAssign(other: Vector3<*>)
-
-    operator fun times(other: Vector3<*>): Vector3<N>
-
-    operator fun divAssign(other: Vector3<*>)
-
-    operator fun div(other: Vector3<*>): Vector3<N>
+    override fun toDouble(): Vector3<Double> = DoubleVector3(x.toDouble(), y.toDouble(), z.toDouble())
 
 
-    override operator fun plus(value: Number): Vector3<N>
+    operator fun plusAssign(other: Vector3<*>) {
+        super.plusAssign(other)
+        plusAssignZ(other.z)
+    }
 
-    override operator fun minus(value: Number): Vector3<N>
 
-    override operator fun times(value: Number): Vector3<N>
+    operator fun minusAssign(other: Vector3<*>) {
+        super.minusAssign(other)
+        minusAssignZ(other.z)
+    }
 
-    override operator fun div(value: Number): Vector3<N>
+
+    operator fun timesAssign(other: Vector3<*>) {
+        super.timesAssign(other)
+        timesAssignZ(other.z)
+    }
+
+
+    operator fun divAssign(other: Vector3<*>) {
+        super.divAssign(other)
+        divAssignZ(other.z)
+    }
+
+    override operator fun plusAssign(value: Number) {
+        super.plus(value)
+        plusAssignZ(value)
+    }
+
+
+    override operator fun minusAssign(value: Number) {
+        super.minusAssign(value)
+        minusAssignZ(value)
+    }
+
+
+    override operator fun timesAssign(value: Number) {
+        super.timesAssign(value)
+        timesAssignZ(value)
+    }
+
+
+    override operator fun divAssign(value: Number) {
+        super.divAssign(value)
+        divAssignZ(value)
+    }
+
+    operator fun plus(other: Vector3<*>): Vector3<N> {
+        val clone = this.clone
+        clone += other
+        return clone
+    }
+
+    operator fun minus(other: Vector3<*>): Vector3<N> {
+        val clone = this.clone
+        clone -= other
+        return clone
+    }
+
+    operator fun times(other: Vector3<*>): Vector3<N> {
+        val clone = this.clone
+        clone *= other
+        return clone
+    }
+
+    operator fun div(other: Vector3<*>): Vector3<N> {
+        val clone = this.clone
+        clone /= other
+        return clone
+    }
+
+    override operator fun plus(value: Number): Vector3<N> {
+        val clone = this.clone
+        clone += value
+        return clone
+    }
+
+    override operator fun minus(value: Number): Vector3<N> {
+        val clone = this.clone
+        clone -= value
+        return clone
+    }
+
+    override operator fun times(value: Number): Vector3<N> {
+        val clone = this.clone
+        clone *= value
+        return clone
+    }
+
+    override operator fun div(value: Number): Vector3<N> {
+        val clone = this.clone
+        clone /= value
+        return clone
+    }
+
+
 }

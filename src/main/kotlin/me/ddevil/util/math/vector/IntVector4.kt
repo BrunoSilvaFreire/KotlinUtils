@@ -3,7 +3,7 @@ package me.ddevil.util.math.vector
 import me.ddevil.util.getInt
 import kotlin.math.sqrt
 
-open class IntVector4 : AbstractVector4<Int> {
+open class IntVector4 : Vector4<Int> {
 
 
     final override var x: Int
@@ -22,10 +22,6 @@ open class IntVector4 : AbstractVector4<Int> {
         this.y = y
         this.z = z
         this.w = w
-    }
-
-    override fun distance(other: Vector4<*>): Double {
-        return sqrt(x * other.x.toDouble() + y * other.y.toDouble() + z * other.z.toDouble() + w * other.w.toDouble())
     }
 
     override val clone: Vector4<Int> get() = IntVector4(x, y, z, w)

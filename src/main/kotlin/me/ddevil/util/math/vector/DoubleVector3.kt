@@ -2,7 +2,7 @@ package me.ddevil.util.math.vector
 
 import me.ddevil.util.getDouble
 
-open class DoubleVector3 : AbstractVector3<Double> {
+open class DoubleVector3 : Vector3<Double> {
 
     companion object {
         val zero = DoubleVector3(0.0, 0.0, 0.0)

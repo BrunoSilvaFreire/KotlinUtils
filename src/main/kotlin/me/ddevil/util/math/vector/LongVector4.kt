@@ -3,7 +3,7 @@ package me.ddevil.util.math.vector
 import me.ddevil.util.getLong
 import kotlin.math.sqrt
 
-open class LongVector4 : AbstractVector4<Long> {
+open class LongVector4 : Vector4<Long> {
 
 
     final override var x: Long
@@ -24,10 +24,6 @@ open class LongVector4 : AbstractVector4<Long> {
         this.y = y
         this.z = z
         this.w = w
-    }
-
-    override fun distance(other: Vector4<*>): Double {
-        return sqrt(x * other.x.toDouble() + y * other.y.toDouble() + z * other.z.toDouble() + w * other.w.toDouble())
     }
 
     override val clone: Vector4<Long> get() = LongVector4(x, y, z, w)

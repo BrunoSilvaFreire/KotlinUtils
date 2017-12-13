@@ -2,7 +2,7 @@ package me.ddevil.util.math.vector
 
 import me.ddevil.util.getFloat
 
-open class FloatVector3 : AbstractVector3<Float> {
+open class FloatVector3 : Vector3<Float> {
     companion object {
         val zero = FloatVector3(0F, 0F, 0F)
         val one = FloatVector3(1F, 1F, 1F)

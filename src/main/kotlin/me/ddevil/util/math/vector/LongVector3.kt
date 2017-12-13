@@ -2,7 +2,7 @@ package me.ddevil.util.math.vector
 
 import me.ddevil.util.getLong
 
-open class LongVector3 : AbstractVector3<Long> {
+open class LongVector3 : Vector3<Long> {
     companion object {
         val zero = LongVector3(0L, 0L, 0L)
         val one = LongVector3(1L, 1L, 1L)

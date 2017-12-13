@@ -1,96 +1,165 @@
 package me.ddevil.util.math.vector
 
+import com.google.common.collect.ImmutableMap
 import me.ddevil.util.Serializable
+import me.ddevil.util.square
 
-/**
- * Represents a 2 dimensional vector, with the x and y axis.
- *
- * For a tri-dimensional vector, check [Vector3]
- */
-interface Vector2<N : Number> : Comparable<Vector2<*>>, Serializable {
-    /**
-     * The value of the x axis
-     */
-    var x: N
-    /**
-     * The value of the y axis
-     */
-    var y: N
+abstract class Vector2<N : Number> : Serializable {
+    abstract val x: N
+    abstract val y: N
+    //Delegates
+    protected abstract fun plusAssignX(value: Number)
 
-    /**
-     * The magnitude / length / modulus of this vector
-     */
+    protected abstract fun plusAssignY(value: Number)
+
+
+    protected abstract fun minusAssignX(value: Number)
+
+    protected abstract fun minusAssignY(value: Number)
+
+
+    protected abstract fun timesAssignX(value: Number)
+
+    protected abstract fun timesAssignY(value: Number)
+
+
+    protected abstract fun divAssignX(value: Number)
+
+    protected abstract fun divAssignY(value: Number)
+
+    protected abstract fun toGeneric(value: Number): N
+
+
+    override fun serialize(): Map<String, Any> = ImmutableMap.builder<String, Any>()
+            .put(X_IDENTIFIER, x)
+            .put(Y_IDENTIFIER, y)
+            .build()
+
+    open fun toInt(): Vector2<Int> = IntVector2(x.toInt(), y.toInt())
+
+    open fun toFloat(): Vector2<Float> = FloatVector2(x.toFloat(), y.toFloat())
+
+    open fun toLong(): Vector2<Long> = LongVector2(x.toLong(), y.toLong())
+
+    open fun toDouble(): Vector2<Double> = DoubleVector2(x.toDouble(), y.toDouble())
+
+    abstract val clone: Vector2<N>
+
+    open val normalized: Vector2<N>
+        get() = clone.normalize()
+
     var magnitude: Double
+        get() = Math.sqrt(x.square().toDouble() + y.square().toDouble())
+        set(value) {
+            this /= magnitude / value
+        }
 
-    /**
-     * Returns a normalized / "with a [magnitude] of 1" [clone] of this vector.
-     *
-     * Important note: This does not changes any value in this vector, all of the changes are made in a [clone].
-     * If you wish to make changes in this instance of the vector, check [normalize].
-     *
-     * @see normalize
-     */
-    val normalized: Vector2<N>
+    open fun distance(other: Vector2<*>) = (other - this).magnitude
 
-    /**
-     * Makes a copy of this vector with the same [x] and [y] values
-     */
-    val clone: Vector2<N>
+    fun compareTo(other: Vector2<*>): Int {
+        if (this === other || this == other) {
+            return 0
+        }
+        return magnitude.compareTo(other.magnitude)
+    }
 
-    /**
-     * The distance from this vector to the [other]
-     */
-    fun distance(other: Vector2<*>): Double
-
-
-    /**
-     * Changes the [magnitude] of this vector to 1 and returns this instance.
-     *
-     * Important note: This does changes the [x] and [y] value in this vector.
-     * If you don't wish to make changes in this instance of the vector, check [normalized].
-     *
-     * @see normalize
-     */
-    fun normalize(): Vector2<N>
-
-    fun toInt(): Vector2<Int>
-
-    fun toFloat(): Vector2<Float>
-
-    fun toLong(): Vector2<Long>
-
-    fun toDouble(): Vector2<Double>
-
-    operator fun plusAssign(other: Vector2<*>)
-
-    operator fun plus(other: Vector2<*>): Vector2<N>
-
-    operator fun minusAssign(other: Vector2<*>)
-
-    operator fun minus(other: Vector2<*>): Vector2<N>
-
-    operator fun timesAssign(other: Vector2<*>)
-
-    operator fun times(other: Vector2<*>): Vector2<N>
-
-    operator fun divAssign(other: Vector2<*>)
-
-    operator fun div(other: Vector2<*>): Vector2<N>
+    open fun normalize(): Vector2<N> {
+        val mag = toGeneric(magnitude)
+        this /= mag
+        return this
+    }
 
 
-    operator fun plusAssign(value: Number)
+    operator fun plusAssign(other: Vector2<*>) {
+        plusAssignX(other.x)
+        plusAssignY(other.y)
+    }
 
-    operator fun plus(value: Number): Vector2<N>
 
-    operator fun minusAssign(value: Number)
+    operator fun plus(other: Vector2<*>): Vector2<N> {
+        val clone = this.clone
+        clone += other
+        return clone
+    }
 
-    operator fun minus(value: Number): Vector2<N>
+    operator fun minusAssign(other: Vector2<*>) {
+        minusAssignX(other.x)
+        minusAssignY(other.y)
+    }
 
-    operator fun timesAssign(value: Number)
 
-    operator fun times(value: Number): Vector2<N>
+    operator fun minus(other: Vector2<*>): Vector2<N> {
+        val clone = this.clone
+        clone -= other
+        return clone
+    }
 
-    operator fun divAssign(value: Number)
+    operator fun timesAssign(other: Vector2<*>) {
+        timesAssignX(other.x)
+        timesAssignY(other.y)
+    }
 
-    operator fun div(value: Number): Vector2<N>
+
+    operator fun times(other: Vector2<*>): Vector2<N> {
+        val clone = this.clone
+        clone *= other
+        return clone
+    }
+
+    operator fun divAssign(other: Vector2<*>) {
+        divAssignX(other.x)
+        divAssignY(other.y)
+    }
+
+    operator fun div(other: Vector2<*>): Vector2<N> {
+        val clone = this.clone
+        clone /= other
+        return clone
+    }
+
+    open operator fun plusAssign(value: Number) {
+        plusAssignX(value)
+        plusAssignY(value)
+    }
+
+
+    open operator fun plus(value: Number): Vector2<N> {
+        val clone = this.clone
+        clone += value
+        return clone
+    }
+
+    open operator fun minusAssign(value: Number) {
+        minusAssignX(value)
+        minusAssignY(value)
+    }
+
+    open operator fun minus(value: Number): Vector2<N> {
+        val clone = this.clone
+        clone -= value
+        return clone
+    }
+
+    open operator fun timesAssign(value: Number) {
+        timesAssignX(value)
+        timesAssignY(value)
+    }
+
+    open operator fun times(value: Number): Vector2<N> {
+        val clone = this.clone
+        clone *= value
+        return clone
+    }
+
+    open operator fun divAssign(value: Number) {
+        divAssignX(value)
+        divAssignY(value)
+    }
+
+    open operator fun div(value: Number): Vector2<N> {
+        val clone = this.clone
+        clone /= value
+        return clone
+    }
 }
+

@@ -45,6 +45,6 @@ constructor(
         val siny = 2F * (w * z + x * y)
         val cosy = 1F - 2F * (y * y + z * z)
         val yaw = atan2(siny, cosy)
-        return FloatVector3(roll, pitch, yaw)
+        return Vector3f(roll, pitch, yaw)
     }
 }

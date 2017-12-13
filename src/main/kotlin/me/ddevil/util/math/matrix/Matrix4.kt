@@ -1,6 +1,5 @@
 package me.ddevil.util.math.matrix
 
-import me.ddevil.util.math.vector.Vector3
 import java.io.Serializable
 
 data class Matrix4
