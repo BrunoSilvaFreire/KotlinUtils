@@ -1,6 +1,6 @@
-package me.ddevil.util.vector
+package me.ddevil.util.math.vector
 
-import me.ddevil.util.vector.*
+import me.ddevil.util.math.vector.*
 
 abstract class AbstractVector4<N : Number> : AbstractVector3<N>(), Vector4<N> {
 

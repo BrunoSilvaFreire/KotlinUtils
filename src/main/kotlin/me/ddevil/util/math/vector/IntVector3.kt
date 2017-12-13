@@ -1,36 +1,39 @@
-package me.ddevil.util.vector
+package me.ddevil.util.math.vector
 
 import me.ddevil.util.getInt
-import kotlin.math.sqrt
 
-open class IntVector4 : AbstractVector4<Int> {
+open class IntVector3 : AbstractVector3<Int> {
 
+    companion object {
+        val zero = IntVector3(0, 0, 0)
+        val one = IntVector3(1, 1, 1)
+        val up = IntVector3(0, 1, 0)
+        val down = IntVector3(0, -1, 0)
+        val left = IntVector3(-1, 0, 0)
+        val right = IntVector3(1, 0, 0)
+        val forward = IntVector3(0, 0, 1)
+        val back = IntVector3(0, 0, -1)
+    }
 
     final override var x: Int
     final override var y: Int
     final override var z: Int
-    final override var w: Int
+
     constructor(map: Map<String, Any>) {
         x = map.getInt(X_IDENTIFIER)
         y = map.getInt(Y_IDENTIFIER)
         z = map.getInt(Z_IDENTIFIER)
-        w = map.getInt(W_IDENTIFIER)
     }
+
     @JvmOverloads
-    constructor(x: Int = 0, y: Int = 0, z: Int = 0, w: Int = 0) : super() {
+    constructor(x: Int = 0, y: Int = 0, z: Int = 0) {
         this.x = x
         this.y = y
         this.z = z
-        this.w = w
     }
 
-    override fun distance(other: Vector4<*>): Double {
-        return sqrt(x * other.x.toDouble() + y * other.y.toDouble() + z * other.z.toDouble() + w * other.w.toDouble())
-    }
 
-    override val clone: Vector4<Int> get() = IntVector4(x, y, z, w)
-
-    override fun toInt(): Vector4<Int> = this
+    override fun toInt(): Vector3<Int> = this
 
     override fun plusAssignX(value: Number) {
         x += value.toInt()
@@ -80,22 +83,10 @@ open class IntVector4 : AbstractVector4<Int> {
         z /= value.toInt()
     }
 
-    override fun plusAssignW(value: Number) {
-        w += value.toInt()
-    }
-
-    override fun minusAssignW(value: Number) {
-        w -= value.toInt()
-    }
-
-    override fun timesAssignW(value: Number) {
-        w *= value.toInt()
-    }
-
-    override fun divAssignW(value: Number) {
-        w /= value.toInt()
-    }
-
     override fun toGeneric(value: Number) = value.toInt()
+
+    override val clone: Vector3<Int> get() = IntVector3(x, y, z)
+
+    override fun toString() = "IntVector3(x=$x, y=$y, z=$z)"
 
 }

@@ -1,6 +1,6 @@
 import com.google.gson.Gson
 import me.ddevil.util.gson.asMap
-import me.ddevil.util.vector.DoubleVector3
+import me.ddevil.util.math.vector.DoubleVector3
 import org.junit.Test
 
 class GSONTest{

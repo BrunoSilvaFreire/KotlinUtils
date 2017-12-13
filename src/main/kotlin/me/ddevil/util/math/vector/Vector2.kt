@@ -1,4 +1,4 @@
-package me.ddevil.util.vector
+package me.ddevil.util.math.vector
 
 import me.ddevil.util.Serializable
 

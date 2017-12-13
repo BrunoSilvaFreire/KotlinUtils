@@ -1,4 +1,4 @@
-package me.ddevil.util.vector
+package me.ddevil.util.math.vector
 
 interface Vector4<N : Number> : Vector3<N> {
     /**

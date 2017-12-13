@@ -1,7 +1,7 @@
 package me.ddevil.util
 
 import java.util.concurrent.ThreadLocalRandom
-import me.ddevil.util.vector.*
+import me.ddevil.util.math.vector.*
 import java.awt.Color
 import java.util.*
 

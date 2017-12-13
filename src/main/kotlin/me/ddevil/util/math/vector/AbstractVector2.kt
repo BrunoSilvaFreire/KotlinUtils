@@ -1,4 +1,4 @@
-package me.ddevil.util.vector
+package me.ddevil.util.math.vector
 
 import com.google.common.collect.ImmutableMap
 import me.ddevil.util.square
