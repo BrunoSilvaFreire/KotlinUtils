@@ -1,13 +1,14 @@
 package me.ddevil.util.math.vector
 
-import com.google.common.collect.ImmutableMap
+import me.ddevil.util.immutableMap
+import me.ddevil.util.set
 
 abstract class Vector3<N : Number> : Vector2<N>() {
     abstract val z: N
-    override fun serialize(): Map<String, Any> = ImmutableMap.builder<String, Any>()
-            .putAll(super.serialize())
-            .put(Z_IDENTIFIER, z)
-            .build()
+    override fun serialize(): Map<String, Any> = immutableMap {
+        putAll(super.serialize())
+        this[Z_IDENTIFIER] = z
+    }
 
     protected abstract fun plusAssignZ(value: Number)
 

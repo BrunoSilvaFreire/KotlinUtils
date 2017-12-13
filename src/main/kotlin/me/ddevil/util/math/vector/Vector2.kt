@@ -2,6 +2,8 @@ package me.ddevil.util.math.vector
 
 import com.google.common.collect.ImmutableMap
 import me.ddevil.util.Serializable
+import me.ddevil.util.immutableMap
+import me.ddevil.util.set
 import me.ddevil.util.square
 
 abstract class Vector2<N : Number> : Serializable {
@@ -30,10 +32,10 @@ abstract class Vector2<N : Number> : Serializable {
     protected abstract fun toGeneric(value: Number): N
 
 
-    override fun serialize(): Map<String, Any> = ImmutableMap.builder<String, Any>()
-            .put(X_IDENTIFIER, x)
-            .put(Y_IDENTIFIER, y)
-            .build()
+    override fun serialize(): Map<String, Any> = immutableMap {
+        this[X_IDENTIFIER] = x
+        this[Y_IDENTIFIER] = y
+    }
 
     open fun toInt(): Vector2<Int> = IntVector2(x.toInt(), y.toInt())
 

@@ -1,5 +1,8 @@
 package me.ddevil.util.math.vector
 
+import me.ddevil.util.immutableMap
+import me.ddevil.util.set
+
 abstract class Vector4<N : Number> : Vector3<N>() {
     abstract val w: N
     override val normalized: Vector4<N>
@@ -8,6 +11,11 @@ abstract class Vector4<N : Number> : Vector3<N>() {
     override fun normalize(): Vector4<N> {
         super.normalize()
         return this
+    }
+
+    override fun serialize(): Map<String, Any> = immutableMap {
+        putAll(super.serialize())
+        this[W_IDENTIFIER] = w
     }
 
     override abstract val clone: Vector4<N>

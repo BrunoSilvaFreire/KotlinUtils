@@ -34,6 +34,26 @@ constructor(
         )
     }
 
+    fun setIdentity() {
+        m00 = 0F
+        m01 = 0F
+        m02 = 0F
+        m03 = 0F
+        m10 = 0F
+        m11 = 0F
+        m12 = 0F
+        m13 = 0F
+        m20 = 0F
+        m21 = 0F
+        m22 = 0F
+        m23 = 0F
+        m30 = 0F
+        m31 = 0F
+        m32 = 0F
+        m33 = 0F
+
+    }
+
     fun determinant(): Float {
         return (m30 * m21 * m12 * m00) - (m20 * m31 * m12 * m00) - (m30 * m11 * m22 * m03) + (m00 * m21 * m12 * m03) +
                 (m20 * m11 * m32 * m03) - (m10 * m21 * m32 * m03) - (m30 * m21 * m02 * m13) + (m20 * m31 * m02 * m13) +
