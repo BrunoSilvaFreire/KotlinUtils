@@ -3,7 +3,7 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 
 group 'me.ddevil'
-version '1.0.1-SNAPSHOT'
+version '1.0.2-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.2.0'
