@@ -2,12 +2,12 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
-group 'me.ddevil'
-version '1.0.2-SNAPSHOT'
+group = 'me.ddevil'
+version = proj_version
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
-    ext.proj_version = "1.0.0-SNASPHOT"
+    ext.kotlin_version = '1.2.10'
+    ext.proj_version = "1.0.0-SNAPSHOT"
     repositories {
         mavenCentral()
     }

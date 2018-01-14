@@ -1,6 +1,7 @@
-package me.ddevil.util.math.matrix
+package me.ddevil.util.math.quaternion
 
 import me.ddevil.util.math.*
+import me.ddevil.util.math.matrix.Matrix4
 import me.ddevil.util.math.vector.Vector3f
 
 
@@ -13,7 +14,7 @@ constructor(
         var w: Float = 1F
 ) {
     companion object {
-        val zero = Quaternion()
+        val identity = Quaternion()
         fun fromEulerAngle(x: Float, y: Float, z: Float): Quaternion {
             return fromEulerAngle(Vector3f(x, y, z))
         }
