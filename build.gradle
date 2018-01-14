@@ -9,7 +9,7 @@ buildscript {
     ext.kotlin_version = '1.2.10'
     ext.proj_version = "1.0.0-SNAPSHOT"
     ext.username_key = 'user'
-    ext.password_key = 'password'
+    ext.password_key = 'pass'
     repositories {
         mavenCentral()
     }
@@ -20,28 +20,34 @@ buildscript {
 
 
 sourceCompatibility = 1.8
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from(project.components.java)
+allprojects {
+    it.afterEvaluate {
+        if (!it.plugins.hasPlugin('maven-publish')) {
+            return
         }
-    }
-    repositories {
-        def prop = project.properties
-        if (prop.containsKey(username_key) & prop.containsKey(password_key)) {
-            it.maven {
-                credentials {
-                    username = prop[username_key]
-                    password = pass[password_key]
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    from(project.components.java)
                 }
-                url = 'http://repo.imddevil.com/repository/maven-snapshots/'
+            }
+            repositories {
+                def prop = project.properties
+                if (prop.containsKey(username_key) & prop.containsKey(password_key)) {
+                    it.maven {
+                        credentials {
+                            username = prop[username_key]
+                            password = prop[password_key]
+                        }
+                        url = 'http://repo.imddevil.com/repository/maven-snapshots/'
+                    }
+                }
+                it.maven {
+                    url = "file://$rootDir/publication"
+                }
+
             }
         }
-        it.maven {
-            url = "file://$rootDir/publication"
-        }
-
     }
 }
 repositories {
