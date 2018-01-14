@@ -2,8 +2,6 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
-group = 'me.ddevil'
-version = proj_version
 
 buildscript {
     ext.kotlin_version = '1.2.10'
@@ -19,8 +17,9 @@ buildscript {
 }
 
 
-sourceCompatibility = 1.8
 allprojects {
+    group = 'me.ddevil'
+    version = proj_version
     it.afterEvaluate {
         if (!it.plugins.hasPlugin('maven-publish')) {
             return
@@ -48,12 +47,15 @@ allprojects {
 
             }
         }
+        if (it.plugins.hasPlugin('java')) {
+            sourceCompatibility = 1.8
+
+            repositories {
+                mavenCentral()
+            }
+        }
     }
 }
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
