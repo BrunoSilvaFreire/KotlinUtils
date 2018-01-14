@@ -8,6 +8,8 @@ version = proj_version
 buildscript {
     ext.kotlin_version = '1.2.10'
     ext.proj_version = "1.0.0-SNAPSHOT"
+    ext.username_key = 'user'
+    ext.password_key = 'password'
     repositories {
         mavenCentral()
     }
@@ -26,14 +28,17 @@ publishing {
         }
     }
     repositories {
-        maven {
-            credentials {
-                username = user
-                password = pass
+        def prop = project.properties
+        if (prop.containsKey(username_key) & prop.containsKey(password_key)) {
+            it.maven {
+                credentials {
+                    username = prop[username_key]
+                    password = pass[password_key]
+                }
+                url = 'http://repo.imddevil.com/repository/maven-snapshots/'
             }
-            url = 'http://repo.imddevil.com/repository/maven-snapshots/'
         }
-        maven {
+        it.maven {
             url = "file://$rootDir/publication"
         }
 
