@@ -5,7 +5,7 @@ apply plugin: 'kotlin'
 
 buildscript {
     ext.kotlin_version = '1.2.10'
-    ext.proj_version = "1.0.0-SNAPSHOT"
+    ext.proj_version = "1.0.1-SNAPSHOT"
     ext.username_key = 'user'
     ext.password_key = 'pass'
     repositories {
