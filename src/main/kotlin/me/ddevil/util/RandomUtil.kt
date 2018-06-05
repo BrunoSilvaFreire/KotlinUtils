@@ -66,11 +66,11 @@ fun randomVector3Long(scale: Long = 1, random: Random = ThreadLocalRandom.curren
 )
 
 fun <T> Array<T>.random(random: Random = ThreadLocalRandom.current()): T {
-    val pos = random.nextInt(this.count() + 1)
+    val pos = random.nextInt(this.count())
     return this.elementAt(pos)
 }
 
 fun <T> Iterable<T>.random(random: Random = ThreadLocalRandom.current()): T {
-    val pos = random.nextInt(this.count() + 1)
+    val pos = random.nextInt(this.count())
     return this.elementAt(pos)
 }
