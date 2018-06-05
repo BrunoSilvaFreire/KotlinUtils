@@ -1,9 +1,9 @@
 package me.ddevil.util
 
-import java.util.concurrent.ThreadLocalRandom
 import me.ddevil.util.math.vector.*
 import java.awt.Color
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 @JvmOverloads
 fun randomColor(random: Random = Random()): Color {
@@ -64,6 +64,11 @@ fun randomVector3Long(scale: Long = 1, random: Random = ThreadLocalRandom.curren
         random.nextLong() * scale,
         random.nextLong() * scale
 )
+
+fun <T> Array<T>.random(random: Random = ThreadLocalRandom.current()): T {
+    val pos = random.nextInt(this.count() + 1)
+    return this.elementAt(pos)
+}
 
 fun <T> Iterable<T>.random(random: Random = ThreadLocalRandom.current()): T {
     val pos = random.nextInt(this.count() + 1)

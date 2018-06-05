@@ -1,5 +1,6 @@
 package me.ddevil.util
 
+inline fun <reified E: Enum<E>> randomEnum() = enumValues<E>().random()
 inline fun <reified E : Enum<E>> enumValueWithIndex(index: Int): E {
     val values = enumValues<E>()
     if (index > values.lastIndex) {
