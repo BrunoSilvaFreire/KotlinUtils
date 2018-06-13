@@ -46,7 +46,7 @@ fun Map<String, *>.getLongOrNull(key: String): Long? = getNumberOrNull(key)?.toL
 
 fun <V> Map<String, *>.getMapOrNull(key: String): Map<String, V>? = getOrNull(key)
 
-fun Map<String, *>.getMapAnyOrNull(key: String): Map<String, Any>? = getMap(key)
+fun Map<String, *>.getMapAnyOrNull(key: String): Map<String, Any>? = getMapOrNull(key)
 
 fun Map<String, *>.getBooleanOrNull(key: String): Boolean? = getOrNull(key)
 
