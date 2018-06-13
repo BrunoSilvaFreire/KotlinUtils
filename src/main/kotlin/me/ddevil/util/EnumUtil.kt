@@ -1,6 +1,6 @@
 package me.ddevil.util
 
-inline fun <reified E: Enum<E>> randomEnum() = enumValues<E>().random()
+inline fun <reified E : Enum<E>> randomEnum() = enumValues<E>().random()
 inline fun <reified E : Enum<E>> enumValueWithIndex(index: Int): E {
     val values = enumValues<E>()
     if (index > values.lastIndex) {
@@ -14,3 +14,5 @@ val Enum<*>.byteOrdinal get() = this.ordinal.toByte()
 val Enum<*>.shortOrdinal get() = this.ordinal.toShort()
 
 val Enum<*>.longOrdinal get() = this.ordinal.toLong()
+
+fun <T : Enum<T>> T.isSet(other: T) = this as Int and other as Int == other as Int

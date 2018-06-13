@@ -14,7 +14,7 @@ abstract class Vector4<N : Number> : Vector3<N>() {
         return this
     }
 
-    override abstract val clone: Vector4<N>
+    abstract override val clone: Vector4<N>
 
     override fun serialize(): Map<String, Any> = immutableMap {
         putAll(super.serialize())

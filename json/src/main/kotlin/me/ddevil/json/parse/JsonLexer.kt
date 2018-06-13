@@ -107,7 +107,7 @@ class JsonLexer {
                                         .append(nextChar())
                                         .append(nextChar())
 
-                                val intValue = java.lang.Integer.parseInt(unicodeChar.toString(), 16);
+                                val intValue = java.lang.Integer.parseInt(unicodeChar.toString(), 16)
                                 currentValue.append(intValue.toChar())
                             }
                             else -> currentValue.append(c)
@@ -135,7 +135,7 @@ class JsonLexer {
             while (isValueLetter(c)) {
                 currentValue.append(c)
                 if (!isValueLetter(peekChar())) {
-                    break;
+                    break
                 } else {
                     c = nextChar()
                 }
@@ -143,7 +143,7 @@ class JsonLexer {
             val v = currentValue.toString()
             if (NUMBER_PATTERN.matcher(v).matches()) {
                 try {
-                    jsonValue = java.lang.Integer.parseInt(v);
+                    jsonValue = java.lang.Integer.parseInt(v)
                 } catch (e: NumberFormatException) {
                     try {
                         jsonValue = java.lang.Long.parseLong(v)
