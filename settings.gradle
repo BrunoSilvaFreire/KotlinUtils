@@ -1,3 +1,0 @@
-include ':gson', ":json"
-rootProject.name = 'kotlin-utils'
-
