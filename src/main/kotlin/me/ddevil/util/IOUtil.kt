@@ -4,19 +4,21 @@ import java.io.File
 import java.io.InputStream
 import java.net.URI
 import java.net.URL
+import java.nio.file.Path
 import java.nio.file.Paths
 
-fun getCurrentExecutionPathFile() = File(".")
-fun getCurrentExecutionPath() = Paths.get(getCurrentExecutionPathURI())
-fun getCurrentExecutionPathURI() = URI.create(getCurrentExecutionPathString())
-fun getCurrentExecutionPathString(): String = System.getProperty("user.dir")
+fun workingDirectoryFile() = File(".")
+fun workingDirectoryPath(): Path = Paths.get(workingDirectoryURI())
+fun workingDirectoryURI(): URI = URI.create(workingDirectoryString())
+fun workingDirectoryString(): String = System.getProperty("user.dir")
 
-fun Any.getResourceAsStream(path: String): InputStream {
-    val stream = this::class.java.getResourceAsStream(path)
+inline fun <reified T> getResourceAsStream(path: String): InputStream {
+    val stream = T::class.java.getResourceAsStream(path)
     return stream ?: throw IllegalArgumentException("Couldn't find any resource with this path! ($path)")
 }
 
-fun Any.getResource(path: String): URL {
-    val stream = this::class.java.getResource(path)
+
+inline fun <reified T> getResource(path: String): URL {
+    val stream = T::class.java.getResource(path)
     return stream ?: throw IllegalArgumentException("Couldn't find any resource with this path! ($path)")
 }
