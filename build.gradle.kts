@@ -22,17 +22,23 @@ dependencies {
 val ver = semver.info
 val secretPropertiesName = "secrets"
 buildProperties {
-    create(secretPropertiesName) {
-        using(file("secrets.properties"))
+    val secretFile = file("secrets.properties")
+    if (secretFile.exists()) {
+        create(secretPropertiesName) {
+            using(secretFile)
+        }
     }
+
 }
 
 val (gitHubPackagesUsername, gitHubPackagesToken) = with(buildProperties) {
     var u: String? = null
     var p: String? = null
-    named(secretPropertiesName) {
-        u = getAt("gpr.username").string
-        p = getAt("gpr.token").string
+    with(findByName(secretPropertiesName)) {
+        if (this != null) {
+            u = getAt("gpr.username").string
+            p = getAt("gpr.token").string
+        }
     }
     return@with u to p
 }
